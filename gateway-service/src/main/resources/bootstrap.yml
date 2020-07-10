@@ -1,6 +1,15 @@
 spring:
   cloud:
-    config:
-      uri: http://localhost:8084
-      profile: dev
-      name: gateway,common
+    nacos:
+      server-addr: 192.168.20.100:8848
+      config:
+        file-extension: yml
+        shared-configs:
+          - data-id: common-dev.yml
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
+        group: dev
+  application:
+    name: gateway
+  profiles:
+    active: dev
